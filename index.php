@@ -16,7 +16,6 @@
         include("partials/nav.php");
     ?>
     <!-- contenu du site -->
-
     <?php
         $req = $bdd->query("SELECT * FROM products ORDER BY date DESC LIMIT 2");
         while($don = $req->fetch())
@@ -30,8 +29,6 @@
         }
         $req->closeCursor();
     ?>
-
-
     <?php
         include("partials/footer.php");
     ?>

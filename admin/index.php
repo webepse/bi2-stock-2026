@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-
+    // test
     if(isset($_POST['login']) && isset($_POST['password']))
     {
         if(empty($_POST['login']) || empty($_POST['password']))
