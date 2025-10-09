@@ -1,6 +1,12 @@
 <?php
     session_start();
 
+    if(isset($_SESSION['login']))
+    {
+        header("LOCATION:dashboard.php");
+        exit();
+    }
+
     // test
     if(isset($_POST['login']) && isset($_POST['password']))
     {
@@ -8,17 +14,17 @@
         {
             $error = "Veuillez remplir le formulaire correctement";
         }else{
-            // simulation de base de données
-            $loginAdmin = "admin";
-            $passwordAdmin = '$2y$10$tJKd5u9SLHglYvLsjKWVmuurt/mZhx28fFTj8Zw9IsLYpq6.BGCbq';
-            // -----------------------------
-
-            // tester le login
             $login = htmlspecialchars($_POST['login']);
-            if($login == $loginAdmin)
+            require '../config/connexion.php';
+            // req à la base de données
+            $req = $bdd->prepare("SELECT * FROM admin WHERE login = ?");
+            $req->execute([$login]);
+            $don = $req->fetch();
+            // tester le login
+            if($don)
             {
                 // traitement du mot passe
-                if(password_verify($_POST['password'],$passwordAdmin))
+                if(password_verify($_POST['password'],$don['password']))
                 {
                     // création d'une variable de session
                     $_SESSION['login'] = $login;

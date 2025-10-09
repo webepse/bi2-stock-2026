@@ -17,6 +17,9 @@
     <title>Document</title>
 </head>
 <body>
+    <?php
+        include("partials/nav.php");
+    ?>
     <div class="container-fluid">
         <h1>Tableau de bord</h1>
     </div>
