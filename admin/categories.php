@@ -25,7 +25,13 @@
     ?>
     <div class="container-fluid">
         <h1>Gestion des catégories</h1>
-        <a href="#" class="btn btn-primary my-2">Ajouter une catégorie</a>
+        <a href="addCategory.php" class="btn btn-primary my-2">Ajouter une catégorie</a>
+        <?php
+            if(isset($_GET['add']) && $_GET['add']=="success")
+            {
+                echo "<div class='alert alert-success'>Vous avez bien ajouté une nouvelle catégorie à la base de données</div>";
+            }
+        ?>
         <table class="table table-striped">
 
             <thead>
