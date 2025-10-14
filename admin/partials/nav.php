@@ -18,7 +18,7 @@
       </ul>
       <ul class="navbar-nav ms-auto">
         <li>
-          <a href="#" class="nav-link">Déconnexion</a>
+          <a href="dashboard.php?deco=ok" class="nav-link">Déconnexion</a>
         </li>
       </ul>
     </div>

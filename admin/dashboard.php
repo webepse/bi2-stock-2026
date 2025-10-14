@@ -5,6 +5,15 @@
         header("LOCATION:index.php");
         exit();
     }
+
+    if(isset($_GET['deco']))
+    {
+        session_destroy();
+        unset($_SESSION['login']);
+        header("LOCATION:index.php");
+        exit();
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
