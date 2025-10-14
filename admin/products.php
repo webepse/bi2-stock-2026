@@ -26,6 +26,45 @@
     <div class="container-fluid">
         <h1>Gestion des produits</h1>
         <a href="#" class="btn btn-primary my-2">Ajouter un produit</a>
+        <table class="table table-striped">
+
+            <thead>
+                <tr class="text-center">
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Date</th>
+                    <th>Catégorie</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php
+                    // DATE_FORMAT(champs,'format de la date')
+                    // %d = jour
+                    // %m = mois
+                    // %Y = année (4 chiffres)
+                    // AS -> crée un alias pour la donnée
+                    $products = $bdd->query("SELECT id, name, category, DATE_FORMAT(date,'%d / %m / %Y') AS mydate FROM products");
+                    while($donProd = $products->fetch())
+                    {
+                        echo '<tr class="text-center">';
+                            echo '<td>'.$donProd['id'].'</td>';
+                            echo '<td>'.$donProd['name'].'</td>';
+                            echo '<td>'.$donProd['mydate'].'</td>';
+                            echo '<td>'.$donProd['category'].'</td>';
+                            echo '<td>';
+                                echo '<a href="#" class="btn btn-warning">Modifier</a>';
+                                echo '<a href="#" class="btn btn-danger mx-2">Supprimer</a>';
+                            echo '</td>';
+                        echo '</tr>';
+                    }
+                    // à cause du système de cursor et qu'on boucle plusieurs fois, on doit close le cursor
+                    $products->closeCursor();
+                ?>
+            </tbody>
+
+        </table>
 
     </div>
 </body>
