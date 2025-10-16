@@ -25,7 +25,7 @@
     ?>
     <div class="container-fluid">
         <h1>Gestion des produits</h1>
-        <a href="#" class="btn btn-primary my-2">Ajouter un produit</a>
+        <a href="addProduct.php" class="btn btn-primary my-2">Ajouter un produit</a>
         <table class="table table-striped">
 
             <thead>

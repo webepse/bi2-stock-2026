@@ -49,7 +49,7 @@
             $update = $bdd->prepare("UPDATE categories SET name=? WHERE id=?");
             $update->execute([$nom,$id]);
             // redirection vers la page categories.php avec indication du success
-            header("LOCATION:categories.php?update=success");
+            header("LOCATION:categories.php?update=".$id);
             exit();
         }else{
             // il y a une erreur dans le formulaire

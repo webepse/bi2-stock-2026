@@ -17,6 +17,7 @@
             $login = htmlspecialchars($_POST['login']);
             require '../config/connexion.php';
             // req à la base de données
+            // ? admin OR 1=1
             $req = $bdd->prepare("SELECT * FROM admin WHERE login = ?");
             $req->execute([$login]);
             $don = $req->fetch();
