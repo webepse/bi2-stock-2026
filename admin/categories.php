@@ -52,7 +52,7 @@
                             echo '<td>'.$donCat['id'].'</td>';
                             echo '<td>'.$donCat['name'].'</td>';
                             echo '<td>';
-                                echo '<a href="#" class="btn btn-warning">Modifier</a>';
+                                echo '<a href="updateCategory.php?id='.$donCat['id'].'" class="btn btn-warning">Modifier</a>';
                                 echo '<a href="#" class="btn btn-danger mx-2">Supprimer</a>';
                             echo '</td>';
                         echo '</tr>';
