@@ -42,12 +42,24 @@
         {
             $err= 5;
         }else{
-            $categorie = htmlspecialchars($_POST['cover']);
+            $cover = htmlspecialchars($_POST['cover']);
         }
 
         if($err == 0)
         {
             // insertion dans la base de données
+            require "../config/connexion.php";
+            $insert = $bdd->prepare("INSERT INTO products(name,date,category,description,cover) VALUE(:nom,:date,:category,:description,:cover)");
+            $insert->execute([
+                ":nom" => $nom,
+                ":date"=>$date,
+                ":category"=>$categorie,
+                ":description"=>$description,
+                ":cover"=>$cover
+            ]);
+            header("LOCATION:products.php?add=success");
+            exit();
+
         }else{
             header("LOCATION:addProduct.php?error=".$err);
             exit();
