@@ -26,6 +26,19 @@
     <div class="container-fluid">
         <h1>Gestion des produits</h1>
         <a href="addProduct.php" class="btn btn-primary my-2">Ajouter un produit</a>
+        <?php
+            if(isset($_GET['add']) && $_GET['add']=="success")
+            {
+                echo "<div class='alert alert-success my-2'>Vous avez bien ajouté un nouveau produit à la base de données</div>";
+            }
+
+            if(isset($_GET['update']) && is_numeric($_GET['update']))
+            {
+                echo "<div class='alert alert-warning my-2'>Vous avez bien modifié le produit #".$_GET['update']."</div>";
+            }
+
+        ?>
+
         <table class="table table-striped">
 
             <thead>
