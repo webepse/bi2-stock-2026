@@ -54,7 +54,7 @@
                             echo '<td>'.$donProd['mydate'].'</td>';
                             echo '<td>'.$donProd['category'].'</td>';
                             echo '<td>';
-                                echo '<a href="#" class="btn btn-warning">Modifier</a>';
+                                echo '<a href="updateProduct.php?id='.$donProd['id'].'" class="btn btn-warning">Modifier</a>';
                                 echo '<a href="#" class="btn btn-danger mx-2">Supprimer</a>';
                             echo '</td>';
                         echo '</tr>';

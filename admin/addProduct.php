@@ -33,6 +33,11 @@
                         // alors j'affiche un message d'erreur
                         echo "<div class='alert alert-danger'>Une erreur est survenue (code erreur: ".$_GET['error'].")</div>";
                     }
+
+                    if(isset($_GET['errorImg']))
+                    {
+                        echo "<div class='alert alert-danger'>Une erreur est survenue au niveau de l'image(code erreur: ".$_GET['errorImg'].")</div>";
+                    }
                 ?>
                 <div class="form-group my-3">
                     <label for="nom">Nom du produit</label>
