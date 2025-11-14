@@ -24,10 +24,13 @@
         <h1>Ajouter un produit</h1>
         <a href="products.php" class="btn btn-secondary my-2">Retour</a>
         <div class="container">
-            <form action="treatmentAddProduct.php" method="POST">
+            <form action="treatmentAddProduct.php" method="POST" enctype="multipart/form-data">
                 <?php
+                    // isset => si existe
+                    // si tu vois dans l'URL ?error=123 alors c'est que tu as une erreur
                     if(isset($_GET['error']))
                     {
+                        // alors j'affiche un message d'erreur
                         echo "<div class='alert alert-danger'>Une erreur est survenue (code erreur: ".$_GET['error'].")</div>";
                     }
                 ?>
@@ -45,7 +48,8 @@
                 </div>
                 <div class="form-group my-3">
                     <label for="cover">Image de couverture</label>
-                    <input type="text" id="cover" name="cover" class="form-control">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+                    <input type="file" id="cover" name="cover" class="form-control">
                 </div>
                 <div class="form-group my-3">
                     <label for="categorie">Catégorie</label>
@@ -69,3 +73,4 @@
     </div>
 </body>
 </html>
+
