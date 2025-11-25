@@ -8,6 +8,36 @@
 
     // besoin de la bdd
     require "../config/connexion.php";
+
+    // vérifier si dans l'url de la page il y a un GET delete ($_GET['delete']) => GET = ?delete=7
+    // localhost/PHP/bi2-stock-2026/admin/products.php?delete=7
+    // is_numeric(7) => true ou false => si c'est un nombre alors true sinon false
+    if(isset($_GET['delete']) && is_numeric($_GET['delete']))
+    {
+        // protection de l'id surtout quand on va utiliser la donnée la bdd
+        $id = htmlspecialchars($_GET['delete']); // &copy;
+        // vérifier si l'id existe dans la bdd
+        $verif = $bdd->prepare("SELECT * FROM products WHERE id=?");
+        $verif->execute([$id]);
+        $donVerif = $verif->fetch();
+        if(!$donVerif)
+        {
+            header("LOCATION:products.php");
+            exit();
+        }
+
+        // supprimer l'image
+        unlink("../images/".$donVerif['cover']);
+
+        // supprimer le produit
+        $supprimer = $bdd->prepare("DELETE FROM products WHERE id=?");
+        $supprimer->execute([$id]);
+
+        // redirection vers la page products.php avec indication du success de la suppression
+        header("LOCATION:products.php?successdelete=".$id);
+        exit();
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +65,11 @@
             if(isset($_GET['update']) && is_numeric($_GET['update']))
             {
                 echo "<div class='alert alert-warning my-2'>Vous avez bien modifié le produit #".$_GET['update']."</div>";
+            }
+
+            if(isset($_GET['successdelete']) && is_numeric($_GET['successdelete']))
+            {
+                echo "<div class='alert alert-danger my-2'>Vous avez bien supprimé le produit #".$_GET['successdelete']."</div>";
             }
 
         ?>
@@ -68,7 +103,27 @@
                             echo '<td>'.$donProd['category'].'</td>';
                             echo '<td>';
                                 echo '<a href="updateProduct.php?id='.$donProd['id'].'" class="btn btn-warning">Modifier</a>';
-                                echo '<a href="#" class="btn btn-danger mx-2">Supprimer</a>';
+
+                                echo '<button type="button" class="btn btn-danger mx-2" data-bs-toggle="modal" data-bs-target="#deleteModal'.$donProd['id'].'">
+  supprimer
+</button>';
+                            echo '<div class="modal fade" id="deleteModal'.$donProd['id'].'" tabindex="-1" aria-labelledby="exampleModalLabel'.$donProd['id'].'" aria-hidden="true">';
+                                echo '<div class="modal-dialog">';
+                                    echo '<div class="modal-content">';
+                                        echo ' <div class="modal-header">';
+                                        echo '<h1 class="modal-title fs-5" id="exampleModalLabel'.$donProd['id'].'">Supprimer #'.$donProd['id'].'</h1>';
+                                        echo '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+                                    echo ' </div>';
+                                        echo ' <div class="modal-body">';
+                                            echo 'Voulez-vous vraiment supprimer le produit: "'.$donProd['name'].'" ?';;
+                                        echo '</div>';
+                                        echo ' <div class="modal-footer">';
+                                            echo ' <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne pas supprimer</button>';
+                                            echo '<a href="products.php?delete='.$donProd['id'].'" class="btn btn-danger mx-2">Supprimer</a>';
+                                        echo '</div>';
+                                    echo '</div>';
+                                echo '</div>';
+                            echo '</div>';
                             echo '</td>';
                         echo '</tr>';
                     }
@@ -82,3 +137,20 @@
     </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
