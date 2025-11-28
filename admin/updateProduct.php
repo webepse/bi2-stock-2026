@@ -58,65 +58,97 @@ include("partials/nav.php");
     <h1>Modifier le produit: <?= $don['name'] ?></h1>
     <a href="products.php" class="btn btn-secondary my-2">Retour</a>
     <div class="container">
-        <form action="treatmentUpdateProduct.php?id=<?= $don['id'] ?>" method="POST" enctype="multipart/form-data">
-            <?php
-            // isset => si existe
-            // si tu vois dans l'URL ?error=123 alors c'est que tu as une erreur
-            if(isset($_GET['error']))
-            {
-                // alors j'affiche un message d'erreur
-                echo "<div class='alert alert-danger'>Une erreur est survenue (code erreur: ".$_GET['error'].")</div>";
-            }
-
-            if(isset($_GET['errorImg']))
-            {
-                echo "<div class='alert alert-danger'>Une erreur est survenue au niveau de l'image(code erreur: ".$_GET['errorImg'].")</div>";
-            }
-            ?>
-            <div class="form-group my-3">
-                <label for="nom">Nom du produit</label>
-                <input type="text" id="nom" name="nom" class="form-control" value="<?= $don['name'] ?>">
-            </div>
-            <div class="form-group my-3">
-                <label for="date">date</label>
-                <input type="date" id="date" name="date" class="form-control" value="<?= $don['date'] ?>">
-            </div>
-            <div class="form-group my-3">
-                <label for="description">Description</label>
-                <textarea id="description" name="description" class="form-control"><?= $don['description'] ?></textarea>
-            </div>
-            <div class="form-group my-3">
-                <label for="cover">Image de couverture</label>
-                <div class="col-md-4 my-3">
-                    <img src="../images/<?= $don['cover'] ?>" alt="image de couverture" class="img-fluid">
-                </div>
-                <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
-                <input type="file" id="cover" name="cover" class="form-control">
-            </div>
-            <div class="form-group my-3">
-                <label for="categorie">Catégorie</label>
-                <select name="categorie" id="categorie" class="form-control">
+        <div class="row">
+            <div class="col-md-6">
+                <form action="treatmentUpdateProduct.php?id=<?= $don['id'] ?>" method="POST" enctype="multipart/form-data">
                     <?php
-                    require "../config/connexion.php";
-                    $reqCat = $bdd->query("SELECT * FROM categories");
-                    while($donCat = $reqCat->fetch())
+                    // isset => si existe
+                    // si tu vois dans l'URL ?error=123 alors c'est que tu as une erreur
+                    if(isset($_GET['error']))
                     {
-                        // si correspondance j'utilise l'attribut selected
-                        if($don['category'] == $donCat['id'])
-                        {
-                            echo "<option value='".$donCat['id']."' selected>".$donCat['name']."</option>";
-                        }else{
-                            echo "<option value='".$donCat['id']."'>".$donCat['name']."</option>";
-                        }
+                        // alors j'affiche un message d'erreur
+                        echo "<div class='alert alert-danger'>Une erreur est survenue (code erreur: ".$_GET['error'].")</div>";
                     }
-                    $reqCat->closeCursor();
+
+                    if(isset($_GET['errorImg']))
+                    {
+                        echo "<div class='alert alert-danger'>Une erreur est survenue au niveau de l'image(code erreur: ".$_GET['errorImg'].")</div>";
+                    }
                     ?>
-                </select>
+                    <div class="form-group my-3">
+                        <label for="nom">Nom du produit</label>
+                        <input type="text" id="nom" name="nom" class="form-control" value="<?= $don['name'] ?>">
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="date">date</label>
+                        <input type="date" id="date" name="date" class="form-control" value="<?= $don['date'] ?>">
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" class="form-control"><?= $don['description'] ?></textarea>
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="cover">Image de couverture</label>
+                        <div class="col-md-4 my-3">
+                            <img src="../images/<?= $don['cover'] ?>" alt="image de couverture" class="img-fluid">
+                        </div>
+                        <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+                        <input type="file" id="cover" name="cover" class="form-control">
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="categorie">Catégorie</label>
+                        <select name="categorie" id="categorie" class="form-control">
+                            <?php
+                            require "../config/connexion.php";
+                            $reqCat = $bdd->query("SELECT * FROM categories");
+                            while($donCat = $reqCat->fetch())
+                            {
+                                // si correspondance j'utilise l'attribut selected
+                                if($don['category'] == $donCat['id'])
+                                {
+                                    echo "<option value='".$donCat['id']."' selected>".$donCat['name']."</option>";
+                                }else{
+                                    echo "<option value='".$donCat['id']."'>".$donCat['name']."</option>";
+                                }
+                            }
+                            $reqCat->closeCursor();
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Modifier" class="btn btn-warning">
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Modifier" class="btn btn-warning">
+            <div class="col-md-6">
+                <!-- gestion des images associées -->
+                 <h2>Gestion des images</h2>
+                 <a href="addImg.php?id=<?= $id ?>" class="btn btn-primary my-3">Ajouter une image</a>
+                 <table class="table table-striped">
+                    <thead>
+                        <th>#</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                        <?php
+                            $galery = $bdd->prepare("SELECT * FROM images WHERE id_product=?");
+                            $galery->execute([$id]);
+                            while($donGal = $galery->fetch())
+                            {
+                                echo "<tr>";
+                                    echo "<td>".$donGal['id']."</td>";
+                                    echo "<td><img src='../images/".$donGal['fichier']."' alt='image de ".$don['name']."' class='img-fluid col-3'></td>";
+                                    echo "<td><a href='#' class='btn btn-danger'>Supprimer</a></td>";
+                                echo "</tr>";
+                            }
+                            $galery->closeCursor();
+                        ?>
+                    </tbody>
+                 </table>
             </div>
-        </form>
+        </div>
+        
     </div>
 </div>
 </body>
