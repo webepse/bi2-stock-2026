@@ -1,36 +1,40 @@
-<?php
-    require "config/connexion.php";
-?>
-
-
-<!DOCTYPE html>
-<html lang="fr">
+<!doctype html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    <script src="assets/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="assets/style.css">
-    <title>Stock</title>
+    <title>Document</title>
 </head>
 <body>
-    <?php
-        include("partials/nav.php");
-    ?>
-    <!-- contenu du site -->
-    <?php
-        $req = $bdd->query("SELECT * FROM products ORDER BY date DESC LIMIT 2");
+<div class="container">
+    <h1>Test Bootstrap cards</h1>
+    <a href="https://getbootstrap.com/docs/5.3/components/card/">Liens vers documentation Boostrap</a>
+    <div class="row">
+        <?php
+        require "config/connexion.php";
+        $req = $bdd->query("SELECT * FROM products ORDER BY date DESC LIMIT 0,4");
         while($don = $req->fetch())
         {
-           // echo "<div>".$don['name']."</div>";
-           echo "<div>";
-                echo "<a href='product.php?id=".$don['id']."'>".$don['name']."</a>";
-                // echo "<a href='product.php?id='></a>";
-                // echo "<a href='product.php?id=".."'>".."</a>";
-           echo "</div>";
+            echo '<div class="col-lg-3 col-md-4 col-sm-6">';
+                echo '<div class="card my-3">';
+                    echo '<img src="images/'.$don['cover'].'" class="card-img-top" alt="image de '.$don['name'].'">';
+                    echo ' <div class="card-body">';
+                        echo '<h5 class="card-title">'.$don['name'].'</h5>';
+                        echo ' <p class="card-text"><strong>Date: </strong>'.$don['date'].'</p>';
+                        echo ' <a href="product.php?id='.$don['id'].'" class="btn btn-primary">En savoir plus</a>';
+                    echo '</div>';
+                echo '</div>';
+            echo '</div>';
         }
         $req->closeCursor();
-    ?>
-    <?php
-        include("partials/footer.php");
-    ?>
+        ?>
+    </div>
+</div>
 </body>
 </html>
