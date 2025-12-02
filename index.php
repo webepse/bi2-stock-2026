@@ -12,8 +12,10 @@
     <title>Document</title>
 </head>
 <body>
+<?php
+    include("partials/nav.php");
+?>
 <div class="container">
-    <h1>Test Bootstrap cards</h1>
     <a href="https://getbootstrap.com/docs/5.3/components/card/">Liens vers documentation Boostrap</a>
     <div class="row">
         <?php

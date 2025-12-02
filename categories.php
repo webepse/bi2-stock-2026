@@ -40,6 +40,9 @@
     <title>Catégories</title>
 </head>
 <body>
+<?php
+    include("partials/nav.php");
+?>
     <div class="container">
         <h1>Les catégories</h1>
         <a href="categories.php" class="btn btn-secondary">Tous</a>

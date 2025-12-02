@@ -40,6 +40,9 @@
     <title>Document</title>
 </head>
 <body>
+<?php
+    include("partials/nav.php");
+?>
     <?php echo $don['name'] ?>
     <h1><?= $don['name'] ?></h1>
     <img src="images/<?= $don['cover'] ?>" alt="image de <?= $don['name'] ?>">

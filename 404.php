@@ -17,6 +17,9 @@
     <title>BI2 - Stock - 404</title>
 </head>
 <body>
+<?php
+    include("partials/nav.php");
+?>
     <div class="container">
         <div class="alert alert-danger mt-5">
             <h1>Page 404 - Cette page d'existe pas (ou plus)</h1>

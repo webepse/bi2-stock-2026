@@ -32,6 +32,9 @@
     <title>Document</title>
 </head>
 <body>
+<?php
+    include("partials/nav.php");
+?>
 <div class="container">
     <h1><?= $donCat['name'] ?></h1>
     <a href="index.php" class="btn btn-secondary my-2">Retour</a>
