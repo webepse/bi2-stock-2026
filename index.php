@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -35,6 +35,9 @@
         }
         $req->closeCursor();
         ?>
+    </div>
+    <div class="d-flex justify-content-center mt-5">
+        <a href="categories.php" class="btn btn-primary">Voir plus</a>
     </div>
 </div>
 </body>
