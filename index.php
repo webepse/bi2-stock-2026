@@ -18,7 +18,7 @@
     <div class="row">
         <?php
         require "config/connexion.php";
-        $req = $bdd->query("SELECT * FROM products ORDER BY date DESC LIMIT 0,4");
+        $req = $bdd->query("SELECT cover, name, DATE_FORMAT(date, '%d/%m/%Y') AS mydate, id FROM products ORDER BY date DESC LIMIT 0,4");
         while($don = $req->fetch())
         {
             echo '<div class="col-lg-3 col-md-4 col-sm-6">';
@@ -26,7 +26,7 @@
                     echo '<img src="images/'.$don['cover'].'" class="card-img-top" alt="image de '.$don['name'].'">';
                     echo ' <div class="card-body">';
                         echo '<h5 class="card-title">'.$don['name'].'</h5>';
-                        echo ' <p class="card-text"><strong>Date: </strong>'.$don['date'].'</p>';
+                        echo ' <p class="card-text"><strong>Date: </strong>'.$don['mydate'].'</p>';
                         echo ' <a href="product.php?id='.$don['id'].'" class="btn btn-primary">En savoir plus</a>';
                     echo '</div>';
                 echo '</div>';
