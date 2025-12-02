@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 14 oct. 2025 à 11:54
+-- Généré le : mar. 02 déc. 2025 à 08:01
 -- Version du serveur : 9.1.0
 -- Version de PHP : 8.3.14
 
@@ -53,9 +53,9 @@ INSERT INTO `admin` (`id`, `login`, `password`) VALUES
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `description` text COLLATE utf8mb4_general_ci,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -66,7 +66,22 @@ CREATE TABLE IF NOT EXISTS `categories` (
 INSERT INTO `categories` (`id`, `name`, `image`, `description`) VALUES
 (1, 'catégorie 1', NULL, NULL),
 (2, 'Catégorie 2', NULL, NULL),
-(3, 'Catégorie 3', NULL, NULL);
+(3, 'Catégorie 32', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `images`
+--
+
+DROP TABLE IF EXISTS `images`;
+CREATE TABLE IF NOT EXISTS `images` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `fichier` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `id_product` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_product` (`id_product`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -83,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `cover` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `products`
@@ -92,7 +107,10 @@ CREATE TABLE IF NOT EXISTS `products` (
 INSERT INTO `products` (`id`, `name`, `date`, `category`, `description`, `cover`) VALUES
 (1, 'Product 1', '2025-10-07', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc arcu felis, ultrices et nisl nec, iaculis malesuada elit. Morbi quis diam in dolor suscipit lacinia. Suspendisse enim arcu, bibendum a turpis id, pulvinar mattis ex. Phasellus efficitur auctor quam ac blandit. Integer ac ligula sed magna dignissim facilisis. Nulla gravida eu ex eu bibendum. Maecenas in rhoncus ipsum. In hac habitasse platea dictumst. Sed lorem purus, malesuada non viverra et, ultrices eget lorem. Phasellus at neque ut felis porta blandit sed ut tortor. Ut non nunc massa. Sed sapien elit, feugiat id euismod in, varius eget erat. ', 'image.jpg'),
 (2, 'Product 2', '2025-09-09', 2, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc arcu felis, ultrices et nisl nec, iaculis malesuada elit. Morbi quis diam in dolor suscipit lacinia. Suspendisse enim arcu, bibendum a turpis id, pulvinar mattis ex. Phasellus efficitur auctor quam ac blandit. Integer ac ligula sed magna dignissim facilisis. Nulla gravida eu ex eu bibendum. Maecenas in rhoncus ipsum. In hac habitasse platea dictumst. Sed lorem purus, malesuada non viverra et, ultrices eget lorem. Phasellus at neque ut felis porta blandit sed ut tortor. Ut non nunc massa. Sed sapien elit, feugiat id euismod in, varius eget erat. ', 'image.jpg'),
-(3, 'Product 3', '2025-07-08', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc arcu felis, ultrices et nisl nec, iaculis malesuada elit. Morbi quis diam in dolor suscipit lacinia. Suspendisse enim arcu, bibendum a turpis id, pulvinar mattis ex. Phasellus efficitur auctor quam ac blandit. Integer ac ligula sed magna dignissim facilisis. Nulla gravida eu ex eu bibendum. Maecenas in rhoncus ipsum. In hac habitasse platea dictumst. Sed lorem purus, malesuada non viverra et, ultrices eget lorem. Phasellus at neque ut felis porta blandit sed ut tortor. Ut non nunc massa. Sed sapien elit, feugiat id euismod in, varius eget erat. ', 'image.jpg');
+(3, 'Product 3', '2025-07-08', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc arcu felis, ultrices et nisl nec, iaculis malesuada elit. Morbi quis diam in dolor suscipit lacinia. Suspendisse enim arcu, bibendum a turpis id, pulvinar mattis ex. Phasellus efficitur auctor quam ac blandit. Integer ac ligula sed magna dignissim facilisis. Nulla gravida eu ex eu bibendum. Maecenas in rhoncus ipsum. In hac habitasse platea dictumst. Sed lorem purus, malesuada non viverra et, ultrices eget lorem. Phasellus at neque ut felis porta blandit sed ut tortor. Ut non nunc massa. Sed sapien elit, feugiat id euismod in, varius eget erat. ', 'image.jpg'),
+(4, 'Produit test', '2025-11-14', 3, 'test', 'https://media.istockphoto.com/id/814423752/fr/photo/oeil-du-mod%C3%A8le-avec-le-maquillage-art-color%C3%A9-gros-plan.jpg?s=612x612&amp;w=0&amp;k=20&amp;c=NeNYcLTUsVfcAyGmFHM7BWpwnFFXvCxsGfSwyZOB8nU='),
+(5, 'produit test 2', '2025-11-14', 2, 'test', '691727095e31f-Couv-272116.jpg'),
+(6, 'test', '2025-11-14', 2, 'test', '691728d6ea6db-Daredevil-12.jpg');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
