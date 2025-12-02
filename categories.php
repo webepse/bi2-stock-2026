@@ -1,8 +1,10 @@
 <?php
     require "config/connexion.php";
+    // mode = filtre
 
     if(isset($_GET['id']) && is_numeric($_GET['id']))
     {
+        // l'utilisateur a choisi un filtre
         $mode = htmlspecialchars($_GET['id']);
         // sécurité, l'id est bien lié à une catégorie existante
         // requête de sécurité
@@ -15,6 +17,7 @@
             exit();
         }
     }else{
+        // aucun filtre
         $mode = "all";
     }
 
@@ -51,6 +54,7 @@
         <div class="row">
             <?php
             require "config/connexion.php";
+            // choix du type de requête suivant le choix du filtre de l'utilisateur
             if($mode == "all")
             {
                 $req = $bdd->query("SELECT products.cover AS cover, products.name AS pname, categories.name AS cname, DATE_FORMAT(products.date, '%d/%m/%Y') AS mydate, products.id AS pid, categories.id AS cid FROM products INNER JOIN categories ON products.category = categories.id ORDER BY products.date DESC");
@@ -58,20 +62,30 @@
                 $req = $bdd->prepare("SELECT products.cover AS cover, products.name AS pname, categories.name AS cname, DATE_FORMAT(products.date, '%d/%m/%Y') AS mydate, products.id AS pid, categories.id AS cid FROM products INNER JOIN categories ON products.category = categories.id WHERE products.category=? ORDER BY products.date DESC");
                 $req->execute([$mode]);
             }
-            while($don = $req->fetch())
+            // compter le nombre de résultats
+            $count = $req->rowCount();
+            // si supérieur à 0 => boucle qui affiche les produits
+            if($count > 0)
             {
-                echo '<div class="col-lg-3 col-md-4 col-sm-6">';
-                    echo '<div class="card my-3">';
-                        echo '<img src="images/'.$don['cover'].'" class="card-img-top" alt="image de '.$don['pname'].'">';
-                        echo ' <div class="card-body">';
-                            echo '<h5 class="card-title">'.$don['pname'].'</h5>';
-                            echo '<a href="categories.php?id='.$don['cid'].'" class="btn btn-secondary">'.$don['cname'].'</a>';
-                            echo ' <p class="card-text"><strong>Date: </strong>'.$don['mydate'].'</p>';
-                            echo ' <a href="product.php?id='.$don['pid'].'" class="btn btn-primary">En savoir plus</a>';
+                while($don = $req->fetch())
+                {
+                    echo '<div class="col-lg-3 col-md-4 col-sm-6">';
+                        echo '<div class="card my-3">';
+                            echo '<img src="images/'.$don['cover'].'" class="card-img-top" alt="image de '.$don['pname'].'">';
+                            echo ' <div class="card-body">';
+                                echo '<h5 class="card-title">'.$don['pname'].'</h5>';
+                                echo '<a href="categories.php?id='.$don['cid'].'" class="btn btn-secondary">'.$don['cname'].'</a>';
+                                echo ' <p class="card-text"><strong>Date: </strong>'.$don['mydate'].'</p>';
+                                echo ' <a href="product.php?id='.$don['pid'].'" class="btn btn-primary">En savoir plus</a>';
+                            echo '</div>';
                         echo '</div>';
                     echo '</div>';
-                echo '</div>';
+                }
+            }else{
+                // si pas supérieur à 0 => afficher un message
+                echo "<p class='col-12 text-center'>Aucun produit dans cette catégorie</p>";
             }
+            // fermeture du curseur de la base de données
             $req->closeCursor();
             ?>
         </div>
