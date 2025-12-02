@@ -55,43 +55,52 @@
             <h1><?= $don['name'] ?></h1>
             <h4><?= $don['date'] ?></h4>
             <div><?= $don['description'] ?></div>
-        </div>
-    </div>
-    <h4>Galerie d'image</h4>
-    <div id="carouselExample" class="carousel slide">
-        <div class="carousel-inner">
-            <?php
-                $galerie = $bdd->prepare("SELECT * FROM images WHERE id_product=?");
-                $galerie->execute([$id]);
-                $count = $galerie->rowCount();
-                var_dump($count);
-                $cpt = 1;
-                while($donGal = $galerie->fetch())
-                {
-                    if($cpt == 1)
+
+
+
+            <h4>Galerie d'image</h4>
+            <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner">
+                    <?php
+                    $galerie = $bdd->prepare("SELECT * FROM images WHERE id_product=?");
+                    $galerie->execute([$id]);
+                    $count = $galerie->rowCount();
+                    if($count > 0)
                     {
-                        echo "<div class='carousel-item active'>";
+                        $cpt = 1;
+                        while($donGal = $galerie->fetch())
+                        {
+                            if($cpt == 1)
+                            {
+                                echo "<div class='carousel-item active'>";
+                            }
+                            else{
+                                echo "<div class='carousel-item'>";
+                            }
+                            echo "<img src='images/".$donGal['fichier']."' class='d-block w-100' alt='image de galere de".$don['name']."'>";
+                            echo "</div>";
+                            $cpt++;
+                        }
                     }
                     else{
-                        echo "<div class='carousel-item'>";
+                        echo "<p>Aucune image pour le moment</p>";
                     }
-                            echo "<img src='images/".$donGal['fichier']."' class='d-block w-100' alt='image de galere de".$don['name']."'>";
-                        echo "</div>";
-                    $cpt++;
-                }
-                $galerie->closeCursor();
+                    $galerie->closeCursor();
 
-            ?>
+                    ?>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
+
 </div>
 </body>
 </html>
