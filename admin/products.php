@@ -28,6 +28,22 @@
 
         // supprimer l'image
         unlink("../images/".$donVerif['cover']);
+        unlink("../images/mini_".$donVerif['cover']);
+
+        // supprimer la galerie image
+        // rechercher les images
+        $searchGal = $bdd->prepare("SELECT * FROM images WHERE id_product=?");
+        $searchGal->execute([$id]);
+        while($donGal = $searchGal->fetch())
+        {
+            unlink("../images/".$donGal['fichier']);
+        }
+        $searchGal->closeCursor();
+
+        // supprimer dans la bdd les données
+        $deGal = $bdd->prepare("DELETE FROM images WHERE id_product=?");
+        $deGal->execute([$id]);
+
 
         // supprimer le produit
         $supprimer = $bdd->prepare("DELETE FROM products WHERE id=?");

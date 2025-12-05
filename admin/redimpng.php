@@ -53,7 +53,7 @@ imagepng($destination,$rep_nom);
 // redirection
 if(isset($_GET['update']))
 {
-    header("LOCATION:products.php?updatesuccess=".$_GET['update']);
+    header("LOCATION:products.php?update=".$_GET['update']);
 }else{
     header("LOCATION:products.php?add=success");
 }

@@ -119,6 +119,7 @@ if(isset($_POST['nom']))
                 {
                     // supprimer l'ancienne image
                     unlink($dossier.$don['cover']);
+                    unlink($dossier."mini_".$don['cover']);
                     // update de la base de données
                     /**
                      * @var $bdd PDO
@@ -132,8 +133,14 @@ if(isset($_POST['nom']))
                         ":img"=>$uniqnomSsafe,
                         ":myid"=>$id
                     ]);
-                    header("LOCATION:products.php?update=".$id);
-                    exit();
+                       if($extension == ".jpg")
+                       {
+                        header("LOCATION:redim.php?image=".$uniqnomSsafe."&update=".$id);
+                        exit();
+                       }elseif($extension == ".png"){
+                        header("LOCATION:redimpng.php?image=".$uniqnomSsafe."&update=".$id);
+                        exit();
+                       }
 
                 }else{
                     // il y a eu un problème au niveau du déplacement de l'image donc erreur avec indication

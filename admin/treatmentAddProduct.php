@@ -172,8 +172,10 @@ var_dump($size);*/
                        if($extension == ".jpg")
                        {
                         header("LOCATION:redim.php?image=".$uniqnomSsafe);
+                        exit();
                        }elseif($extension == ".png"){
                         header("LOCATION:redimpng.php?image=".$uniqnomSsafe);
+                        exit();
                        }
                     }else{
                         // il y a eu un problème au niveau du déplacement de l'image donc erreur avec indication

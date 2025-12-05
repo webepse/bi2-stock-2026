@@ -8,6 +8,41 @@
 
     // besoin de la bdd
     require "../config/connexion.php";
+
+    if(isset($_GET['delete']) && is_numeric($_GET['delete']))
+    {
+        $id = htmlspecialchars($_GET['delete']);
+        $products = $bdd->prepare("SELECT * FROM products WHERE category=?");
+        $products->execute([$id]);
+        while($donProd = $products->fetch())
+        {
+            unlink("../images/".$donProd['cover']);
+            unlink("../images/mini_".$donProd['cover']);
+            // chercher les images associées
+            $galImg = $bdd->prepare("SELECT * FROM images WHERE id_product=?");
+            $galImg->execute([$donProd['id']]);
+            while($donGal = $galImg->fetch())
+            {
+                unlink("../images/".$donGal['fichier']);
+            }
+            $galImg->closeCursor();
+            // supprimer les données
+            $delGal = $bdd->prepare("DELETE FROM images WHERE id_product=?");
+            $delGal->execute([$donProd['id']]);
+        }
+        $products->closeCursor();
+
+        // supprimer les données produits
+        $delProd = $bdd->prepare("DELETE FROM products WHERE category=?");
+        $delProd->execute([$id]);
+        
+        // supprimer categorie
+        $delCat = $bdd->prepare("DELETE FROM categories WHERE id=?");
+        $delCat->execute([$id]);
+
+        header("LOCATION:categories.php?successdel=".$id);
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +92,27 @@
                             echo '<td>'.$donCat['name'].'</td>';
                             echo '<td>';
                                 echo '<a href="updateCategory.php?id='.$donCat['id'].'" class="btn btn-warning">Modifier</a>';
-                                echo '<a href="#" class="btn btn-danger mx-2">Supprimer</a>';
+                                echo '<button type="button" class="btn btn-danger mx-2" data-bs-toggle="modal" data-bs-target="#deleteModal'.$donCat['id'].'">
+  supprimer
+</button>';
+                            echo '<div class="modal fade" id="deleteModal'.$donCat['id'].'" tabindex="-1" aria-labelledby="exampleModalLabel'.$donCat['id'].'" aria-hidden="true">';
+                                echo '<div class="modal-dialog">';
+                                    echo '<div class="modal-content">';
+                                        echo ' <div class="modal-header">';
+                                        echo '<h1 class="modal-title fs-5" id="exampleModalLabel'.$donCat['id'].'">Supprimer #'.$donCat['id'].'</h1>';
+                                        echo '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+                                    echo ' </div>';
+                                        echo ' <div class="modal-body">';
+                                            echo 'Voulez-vous vraiment supprimer le produit: "'.$donCat['name'].'" ?';;
+                                        echo '</div>';
+                                        echo ' <div class="modal-footer">';
+                                            echo ' <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne pas supprimer</button>';
+                                            echo '<a href="categories.php?delete='.$donCat['id'].'" class="btn btn-danger mx-2">Supprimer</a>';
+                                        echo '</div>';
+                                    echo '</div>';
+                                echo '</div>';
+                            echo '</div>';
+
                             echo '</td>';
                         echo '</tr>';
                     }
