@@ -107,7 +107,7 @@ var_dump($size);*/
                 // vérification des données de l'image
                 // vérification de l'extension
                 //création d'un tableau des extensions acceptées
-                $extensionsAcceptees = ['.jpg','.jpeg','.png','.gif'];
+                $extensionsAcceptees = ['.jpg','.jpeg','.png'];
                 // in_array vérifie si l'extension ($extension) est dans le tableau ($extensionsAcceptees)
                 // ! => négation (si l'extension n'est pas dans le tableau, alors on peut pas l'uploader => $erreur)
                 if(!in_array($extension,$extensionsAcceptees))
@@ -116,7 +116,7 @@ var_dump($size);*/
                 }
 
                 // vérification du type MIME (type de fichier)
-                $mimeTypesAcceptes = ['image/jpeg','image/jpg','image/png','image/gif'];
+                $mimeTypesAcceptes = ['image/jpeg','image/jpg','image/png'];
                 if(!in_array($mimeType,$mimeTypesAcceptes))
                 {
                     $errImg = 6;
@@ -169,9 +169,12 @@ var_dump($size);*/
                             ":descri"=>$description,
                             ":cover"=>$uniqnomSsafe
                         ]);
-                        header("LOCATION:products.php?add=success");
-                        exit();
-
+                       if($extension == ".jpg")
+                       {
+                        header("LOCATION:redim.php?image=".$uniqnomSsafe);
+                       }elseif($extension == ".png"){
+                        header("LOCATION:redimpng.php?image=".$uniqnomSsafe);
+                       }
                     }else{
                         // il y a eu un problème au niveau du déplacement de l'image donc erreur avec indication
                         header("LOCATION:addProduct.php?errorImg=8");

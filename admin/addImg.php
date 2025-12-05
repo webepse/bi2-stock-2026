@@ -29,9 +29,6 @@ if(!$don)
     header("LOCATION:products.php");
     exit();
 }
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

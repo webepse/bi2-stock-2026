@@ -47,7 +47,7 @@
         {
             echo '<div class="col-lg-3 col-md-4 col-sm-6">';
             echo '<div class="card my-3">';
-            echo '<img src="images/'.$don['cover'].'" class="card-img-top" alt="image de '.$don['pname'].'">';
+            echo '<img src="images/mini_'.$don['cover'].'" class="card-img-top" alt="image de '.$don['pname'].'">';
             echo ' <div class="card-body">';
             echo '<h5 class="card-title">'.$don['pname'].'</h5>';
             echo '<a href="category.php?id='.$don['cid'].'" class="btn btn-secondary">'.$don['cname'].'</a>';
