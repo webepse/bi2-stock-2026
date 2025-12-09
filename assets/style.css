@@ -12,3 +12,65 @@
     height: 300px;
     object-fit: contain;
 }
+
+.slide{
+    width: 100%;
+    min-height: 100vh;
+}
+
+#contact{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#contact .gauche, #contact .droite{
+    width: 50%;
+    min-height: 100vh;
+}
+
+#contact .gauche{
+    background-color: #7c0000;
+}
+
+#contact .droite{
+    box-sizing: border-box;
+    padding: 30px 20px;
+}
+
+#contact .form-group{
+    margin: 20px 0;
+}
+
+#contact label{
+    display: block;
+    margin-bottom: 5px;
+}
+
+#contact input, #contact textarea{
+    width: 100%;
+}
+
+#contact textarea{
+    height: 300px;
+    resize: none;
+}
+
+#contact input[type="submit"]{
+    background-color: #7c0000;
+    color: white;
+    border: none;
+    width: fit-content;
+    padding: 5px 20px;
+}
+
+.message-error{
+    padding: 15px;
+    background-color: #7c0000;
+    color: white;
+}
+
+.message-success{
+    padding: 15px;
+    background-color: #007c00;
+    color: white;
+}
