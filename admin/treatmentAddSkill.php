@@ -6,7 +6,6 @@
         exit();
     }
 
-
     // vérification de l'envoie du formulaire
     if(isset($_POST['nom']))
     {
