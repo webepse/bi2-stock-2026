@@ -8,6 +8,45 @@
 
     // besoin de la bdd
     require "../config/connexion.php";
+    // pour calculer l'offset de l'info dans l'url
+    // récup page dans l'url
+    // intérroger la bdd pour savoir combien j'ai besoin de page
+    $reqPage = $bdd->query("SELECT * FROM products");
+    $count = $reqPage->rowCount();
+    $limit= 5;
+    // 41 
+    // limit de 10
+    // 41/10 = 4.1
+    $nbPage = ceil($count/$limit);
+    if(isset($_GET['page']))
+    {
+        // sécurité
+        // pour savoir si une valeur est numérique => is_numeric()
+        if(is_numeric($_GET['page']))
+        {
+            if($_GET['page']>$nbPage)
+            {
+                $pg = $nbPage;
+            }elseif($_GET['page'] <=0)
+            {
+                $pg = 1;
+            }else{
+                $pg = htmlspecialchars($_GET['page']);
+            }
+        }else{
+            header("LOCATION:404.php");
+            exit();
+        }
+    }else{
+        $pg=1;
+    }
+
+    // (1-1)*10=0
+    // (2-1)*10=10
+    // (3-1)*10=20 
+    $offset = ($pg-1)*$limit;
+ 
+ 
 
     // vérifier si dans l'url de la page il y a un GET delete ($_GET['delete']) => GET = ?delete=7
     // localhost/PHP/bi2-stock-2026/admin/products.php?delete=7
@@ -109,7 +148,10 @@
                     // %m = mois
                     // %Y = année (4 chiffres)
                     // AS -> crée un alias pour la donnée
-                    $products = $bdd->query("SELECT id, name, category, DATE_FORMAT(date,'%d / %m / %Y') AS mydate FROM products");
+                    $products = $bdd->prepare("SELECT id, name, category, DATE_FORMAT(date,'%d / %m / %Y') AS mydate FROM products LIMIT :offset,:limit");
+                    $products->bindParam(":offset",$offset, PDO::PARAM_INT);
+                    $products->bindParam(":limit",$limit, PDO::PARAM_INT);
+                    $products->execute();
                     while($donProd = $products->fetch())
                     {
                         echo '<tr class="text-center">';
