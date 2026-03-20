@@ -192,6 +192,33 @@
 
         </table>
 
+        <nav class="d-flex justify-content-center my-5">
+            <ul class="pagination">
+                <?php
+                    if($pg>1)
+                    {
+                        echo '<li class="page-item"><a href="products.php?page='.($pg-1).'" class="page-link">Previous</a></li>';
+                    }
+
+                    for($i=1;$i<=$nbPage;$i++)
+                    {
+                        if($pg==$i)
+                        {   
+                            echo '<li class="page-item active"><a class="page-link" href="products.php?page='.$i.'">'.$i.'</a></li>';
+
+                        }else{
+                            echo '<li class="page-item"><a class="page-link" href="products.php?page='.$i.'">'.$i.'</a></li>';
+                        }
+                    }
+
+                    if($pg!=$nbPage)
+                    {
+                        echo '<li class="page-item"><a class="page-link" href="products.php?page='.($pg+1).'">Next</a></li>';
+                    }
+                ?>   
+            </ul>
+        </nav>
+
     </div>
 </body>
 </html>
