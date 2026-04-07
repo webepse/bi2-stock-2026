@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="assets/bootstrap-5.3.8-dist/css/bootstrap.min.css">
     <script src="assets/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="build/style.css">
     <title>Catégories</title>
 </head>
 <body>

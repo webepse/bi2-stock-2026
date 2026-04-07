@@ -1,0 +1,123 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.slide{
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+.card img{
+    height: 250px;
+    object-position: center top;
+    object-fit: cover;
+}
+
+#carouselExample{
+    width: 30vw;
+}
+
+#carouselExample img{
+    height: 300px;
+    object-fit: contain;
+}
+
+.slide{
+    width: 100%;
+    min-height: 100vh;
+}
+
+#contact{
+    display: flex;
+    flex-wrap: wrap;
+    .gauche, .droite{
+        width: 50%;
+        min-height: 100vh;
+    }
+    .gauche{
+        background-color: #7c0000;
+    }
+    .droite{
+        box-sizing: border-box;
+        padding: 30px 20px; 
+    }
+
+    .form-group{
+        margin: 20px 0;
+    }
+
+    label{
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input, textarea{
+        width: 100%;
+    }
+
+    textarea{
+        height: 300px;
+        resize: none;
+    }
+
+    input[type="submit"]{
+        background-color: #7c0000;
+        color: white;
+        border: none;
+        width: fit-content;
+        padding: 5px 20px;
+    }
+}
+
+.message-error{
+    padding: 15px;
+    background-color: #7c0000;
+    color: white;
+}
+
+.message-success{
+    padding: 15px;
+    background-color: #007c00;
+    color: white;
+}
+
+%boite{
+    width: 500px;
+    height: 500px;
+    transition: all 1s;
+
+    &:hover{
+        transform: scale(1.5);
+    }
+}
+
+$color: red;
+
+#boite-rouge{
+    @extend %boite;
+    background-color: $color;
+}
+
+#boite-bleu{
+    @extend %boite;
+    background-color: blue;
+}
+
+@mixin transform($property)
+{
+    -webkit-transform: $property;
+    -ms-transform: $property;
+    -moz-transform: $property;
+    transform: $property;
+}
+
+.box{
+    @include transform(scale(1.5));
+}
+
+.box2{
+    @include transform(translate(15px,15px));
+}
+
