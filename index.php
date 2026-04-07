@@ -15,7 +15,9 @@
 <?php
     include("partials/nav.php");
 ?>
-<div class="slide" id="home"></div>
+<div class="slide" id="home">
+    <h1>Bienvenu</h1>
+</div>
 <div class="container">
     <a href="https://getbootstrap.com/docs/5.3/components/card/">Liens vers documentation Boostrap</a>
     <div class="row">

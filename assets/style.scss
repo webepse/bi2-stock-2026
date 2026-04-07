@@ -1,3 +1,8 @@
+@font-face{
+    font-family: "shrik";
+    src: url(fonts/Shrikhand-Regular.ttf);
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -119,5 +124,9 @@ $color: red;
 
 .box2{
     @include transform(translate(15px,15px));
+}
+
+h1{
+    font-family: "shrik";
 }
 
