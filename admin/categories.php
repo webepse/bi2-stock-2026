@@ -35,7 +35,14 @@
         // supprimer les données produits
         $delProd = $bdd->prepare("DELETE FROM products WHERE category=?");
         $delProd->execute([$id]);
-        
+
+        // supprimer l'image de la catégorie
+        $imgGal = $bdd->prepare("SELECT * FROM categories WHERE id=?");
+        $imgGal->execute([$id]);
+        $donImgGal = $imgGal->fetch();
+        unlink("../images/".$donImgGal['image']);
+        $imgGal->closeCursor();
+
         // supprimer categorie
         $delCat = $bdd->prepare("DELETE FROM categories WHERE id=?");
         $delCat->execute([$id]);

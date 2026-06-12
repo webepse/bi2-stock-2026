@@ -41,7 +41,7 @@
         <h1>Modifier une catégorie</h1>
         <a href="categories.php" class="btn btn-secondary my-2">Retour</a>
         <div class="container">
-            <form action="treatmentUpdateCategory.php?id=<?= $don['id'] ?>" method="POST">
+            <form action="treatmentUpdateCategory.php?id=<?= $don['id'] ?>" method="POST" enctype="multipart/form-data">
                 <?php
                     if(isset($_GET['error']))
                     {
@@ -52,6 +52,11 @@
                     <label for="nom">Nom de la catégorie</label>
 
                     <input type="text" id="nom" name="nom" class="form-control" value="<?= $don['name'] ?>">
+                </div>
+                <div class="form-group my-3">
+                    <div class="col-4"><img src="../images/<?= $don['image'] ?>" alt="image de la catégorie - <?=$don['name'] ?>"></div>
+                    <label for="image">Image de la catégorie</label>
+                    <input type="file" name="image" id="image" class="form-control">
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Modifier" class="btn btn-warning">
