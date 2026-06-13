@@ -65,7 +65,7 @@ include("partials/nav.php");
 
         <tbody>
         <?php
-            $req = $bdd->query("SELECT id, nom, email, DATE_FORMAT(date,'%d/%m/%Y %Hh%i') AS mydate FROM contact");
+            $req = $bdd->query("SELECT id, nom, email, DATE_FORMAT(date,'%d/%m/%Y %Hh%i') AS mydate FROM contact ORDER BY date DESC");
             while($don = $req->fetch())
             {
                 echo "<tr class='text-center'>";

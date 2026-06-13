@@ -34,73 +34,80 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/bootstrap-5.3.8-dist/css/bootstrap.min.css">
-    <script src="assets/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="build/style.css">
-    <title>BI2 - Stock - <?= $don['name'] ?></title>
+   <?php include("partials/head.php"); ?>
 </head>
 <body>
 <?php
     include("partials/nav.php");
 ?>
-<div class="container">
-    <div class="row my-5">
-        <div class="col-md-6">
+<div class="slide" id="product">
+    <a href="categories.php" class="btn btn-primary">Les catégories</a>
+    <div class="row">
+        <div class="gauche">
             <img src="images/<?= $don['cover'] ?>" alt="image de <?= $don['name'] ?>" class="img-fluid">
         </div>
-        <div class="col-md-6">
-            <h1><?= $don['name'] ?></h1>
-            <h4><?= $don['date'] ?></h4>
-            <div><?= $don['description'] ?></div>
-
-
-
-            <h4>Galerie d'image</h4>
-            <div id="carouselExample" class="carousel slide">
-                <div class="carousel-inner">
+        <div class="droite">
+            <div class="texte">
+                <h1><?= $don['name'] ?></h1>
+                <h4><?= $don['date'] ?></h4>
+                <div><?= $don['description'] ?></div>
+                <div id="product-galerie">
+                    <h4>Galerie d'image</h4>
                     <?php
-                    $galerie = $bdd->prepare("SELECT * FROM images WHERE id_product=?");
-                    $galerie->execute([$id]);
-                    $count = $galerie->rowCount();
-                    if($count > 0)
-                    {
-                        $cpt = 1;
-                        while($donGal = $galerie->fetch())
-                        {
-                            if($cpt == 1)
+                            $galerie = $bdd->prepare("SELECT * FROM images WHERE id_product=?");
+                            $galerie->execute([$id]);
+                            $count = $galerie->rowCount();
+                            if($count > 0)
                             {
-                                echo "<div class='carousel-item active'>";
+                                echo ' <div class="swiper mySwiper">';
+                                    echo '<div class="swiper-wrapper">';
+                                        while($donGal = $galerie->fetch())
+                                        {
+                                            echo '<div class="swiper-slide">';
+                                                echo "<img src='images/".$donGal['fichier']."' alt='image de galere de".$don['name']."'>";
+                                            echo "</div>";
+                                        }
+                                    echo "</div>";
+                                echo "</div>";
                             }
                             else{
-                                echo "<div class='carousel-item'>";
+                                echo "<p>Aucune image pour le moment</p>";
                             }
-                            echo "<img src='images/".$donGal['fichier']."' class='d-block w-100' alt='image de galere de".$don['name']."'>";
-                            echo "</div>";
-                            $cpt++;
-                        }
-                    }
-                    else{
-                        echo "<p>Aucune image pour le moment</p>";
-                    }
-                    $galerie->closeCursor();
-
+                            $galerie->closeCursor();
                     ?>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
         </div>
     </div>
-
 </div>
+<?php include("partials/footer.php"); ?>
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        }
+    });
+
+    const burger = document.querySelector("#burger");
+    const menuMobile = document.querySelector("#menu-mobile");
+    // select links (retourne un tableau - array)
+    const links = document.querySelectorAll("#menu-mobile nav ul li a");
+
+    // fonction flechée () => {}
+    burger.addEventListener("click",()=>{
+        burger.classList.toggle("open");
+        menuMobile.classList.toggle("open");
+    });
+
+    // boucler/parcourir le tableau link
+    for(let link of links){
+        link.addEventListener("click",()=>{
+            burger.classList.remove("open");
+            menuMobile.classList.remove("open");
+        })
+    }
+</script>
 </body>
 </html>

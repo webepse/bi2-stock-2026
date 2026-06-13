@@ -1,0 +1,842 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.slide{
+    width: 100%;
+    min-height: 100vh;
+}
+
+.container,.wrapper{
+    width: 90%;
+    margin: 0 auto;
+}
+
+#home{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+}
+
+header{
+    grid-column: 1 / span 12;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+header nav ul{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    list-style:none;
+}
+
+header nav ul li a{
+    color: black;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+}
+
+#container-burger{
+    width: 50px;
+    height: 40px;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.4);
+    z-index: 100;
+    display: none;
+}
+
+#burger{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+}
+
+#burger .bar{
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    transition: all 0.5s;
+}
+
+#burger .bar:nth-child(1)
+{
+    top: 0;
+    width: 100%;
+}
+
+#burger .bar:nth-child(2)
+{
+    top: 50%;
+    width: 70%;
+    transform: translateY(-50%);
+}
+
+#burger .bar:nth-child(3)
+{
+    top: 100%;
+    transform: translateY(-100%);
+    width: 45%;
+}
+
+#burger.open .bar:nth-child(1)
+{
+    top: 50%;
+    width: 100%;
+    background-color: #c8f542;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+#burger.open .bar:nth-child(2)
+{
+    transform: translateY(-50%) scaleX(0);
+    opacity: 0;
+}
+
+#burger.open .bar:nth-child(3)
+{
+    top: 50%;
+    width: 100%;
+    background-color: #c8f542;
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+#menu-mobile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #222222;
+    position: fixed;
+    top: 0;
+    left: 100%;
+    z-index: 99;
+    width: 100%;
+    height: 100vh;
+    transition: all 0.8s;
+}
+
+#menu-mobile.open{
+    left: 0;
+}
+
+#menu-mobile nav ul{
+    list-style: none;
+}
+#menu-mobile nav ul li{
+    margin-bottom: 25px;
+}
+#menu-mobile nav ul li a{
+    text-decoration: none;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+}
+
+
+#logo{
+    font-family: 'Anton', sans-serif;
+    background-color: black;
+    color: white;
+    padding: 10px 15px;
+    margin-left: 15px;
+}
+
+#hero{
+    grid-column: 3 / span 4;
+    grid-row: 5 / span 4;
+}
+
+#hero h4{
+    font-family: "DM Sans", sans-serif;
+    font-size: 30px;
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: black;
+}
+
+#hero h1{
+    font-family: "Anton", sans-serif;
+    font-size: 80px;
+    font-weight: 800;
+    letter-spacing: 5px;
+    color: black;
+}
+
+#hero p{
+    font-family: "DM Sans", sans-serif;
+    font-weight: 400;
+    color: #222222;
+    font-size: 18px;
+}
+
+#hero .btn{
+    background-color: black;
+    color: white;
+    display: block;
+    width: fit-content;
+    padding: 6px 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+#social{
+    grid-column: 11 / span 2;
+    grid-row: 12 / span 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/************* Présentation *************/
+#pres{
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 60vh;
+    position: relative;
+    overflow: hidden;
+}
+#pres .gauche{
+    width: 40%;
+    background-color: black;
+    position: relative;
+}
+
+#pres .droite{
+    width: 60%;
+    background-color: white;
+}
+
+#pres .container{
+    padding: 20px 15px 30px;
+}
+
+#pres h2{
+    font-family: "Anton", sans-serif;
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+#pres p{
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+#pres .btn{
+    background-color: black;
+    color: white;
+    display: block;
+    width: fit-content;
+    padding: 6px 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    margin: 15px auto;
+    cursor: pointer;
+}
+
+#container-video{
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 10;
+    transition: left 0.8s;
+}
+
+#container-video.open{
+    left: 0;
+}
+
+#video-fond{
+    position: absolute;
+    inset: 0;
+}
+
+#video-fond video{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+}
+
+#close-video{
+    position: absolute;
+    width: fit-content;
+    padding: 5px 15px;
+    font-family: 'DM Sans', sans-serif;
+    background-color: gold;
+    z-index: 11;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+#skills{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+}
+
+#pres h3{
+    font-family: "Anton", sans-serif;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.skills{
+    position: relative;
+    height: 60px;
+    overflow: hidden;
+}
+
+.skills img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.skills .title{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    background-color: rgba(0,0,0,0.8);
+    top: 100%;
+    left: 0;
+    transition: top 0.8s ease;
+}
+
+.skills:hover .title{
+    top: 0;
+}
+
+.swiper {
+    position: absolute;
+    inset: 0;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #444;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+
+/**************** galerie ************/
+#galerie{
+    min-height: 80vh;
+    padding-bottom: 20px;
+}
+
+#galerie h2{
+    font-family: "Anton", sans-serif;
+    font-size: 35px;
+    padding: 20px 0;
+}
+
+#galerie .container{
+    padding-top: 30px;
+}
+
+
+#container-gal{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+#container-gal .images{
+    height: 350px;
+    background-color: #222222;
+    position: relative;
+    overflow: hidden;
+}
+
+#container-gal .images .info-gal{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(0,0,0,0.8);
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    transition: top 0.8s ease;
+    text-align: center;
+}
+
+#container-gal .images .info-gal .title-gal{
+    display: block;
+    width: 100%;
+    color: #fff;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+}
+
+#container-gal .images .info-gal .categorie-gal{
+    display: flex;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #3333;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+}
+
+#container-gal .images:hover .info-gal{
+    top: 0;
+}
+
+.images img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+
+
+/*************** Contact *************/
+
+#contact{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container{
+    width: 100%;
+    height: 40vh;
+    background-color: #818181;
+    display: flex;
+}
+
+#container .wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#contact .gauche, #contact .droite{
+    width: 50%;
+    height: 100%;
+}
+
+#contact .gauche{
+    color: white;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+
+#contact .droite{
+    background-color: white;
+    min-height: 60vh;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.40);
+    height: auto;
+}
+
+#contact h3{
+    font-family: "Anton", sans-serif;
+    font-size: 35px;
+}
+
+.title-contact{
+    font-family: "DM Sans", sans-serif;
+    font-size: 25px;
+    margin: 10px 0;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+}
+
+.title-contact img{
+    margin-right: 10px;
+}
+
+.info-contact{
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+#contact form{
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 20px;
+    color: black;
+}
+
+#contact form input{
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    border: none;
+    border-bottom: solid 1px black;
+}
+
+#contact form textarea{
+    width: 100%;
+    height: 250px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    resize: none;
+    border: none;
+    border-bottom: solid 1px black;
+}
+
+#contact form input[type="submit"]
+{
+    width: fit-content;
+    background-color: white;
+    border: solid 1px black;
+    padding: 10px 20px;
+    font-weight: 600;
+}
+
+.error{
+    color: red;
+}
+
+.success{
+    color: green;
+}
+
+
+footer{
+    width: 100%;
+    background-color: black;
+    min-height: 20vh;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+footer .wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#disclaimer, #about, #social-footer{
+    width: 30%;
+    font-family: "DM Sans", sans-serif;
+    font-size: 1rem;
+}
+
+footer h4{
+    font-family: "Anton", sans-serif;
+    font-size: 25px;
+    padding-top: 20px;
+    text-transform: uppercase;
+}
+
+footer h3{
+    font-family: "Anton", sans-serif;
+    font-size: 30px;
+    padding-top: 20px;
+    text-transform: uppercase;
+}
+
+#social-footer{
+    padding-top: 20px;
+}
+
+#social-footer{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#social-footer img{
+    width: 40px;
+}
+
+#copyright{
+    width: 100%;
+    padding: 30px 0 15px;
+    color: #cbcbcb;
+    font-family: "DM Sans", sans-serif;
+    font-size: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/******** categories *********/
+#categories{
+    padding-bottom: 30px;
+}
+
+.container{
+    width: 90%;
+    margin: 0 auto;
+}
+
+#cat-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    align-items: start;
+    padding: 25px 0;
+    justify-content: start;
+}
+
+#cat-container .btn{
+    margin: 0;
+}
+
+.btn{
+    display: block;
+    width: fit-content;
+    padding: 10px 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    margin: 20px auto;
+}
+
+.btn.btn-primary{
+    background-color: #7b00be;
+    color: #fff;
+}
+
+.btn.btn-secondary{
+    background-color: #dfaf43;
+    color: #fff;
+}
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0 auto;
+    gap: 25px;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.175);
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.card-img-top {
+    width: 100%;
+    min-height: 200px;
+    max-height: 200px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    object-fit: cover;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    padding: 16px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.card-text {
+    margin-bottom: 12px;
+}
+
+.card-footer {
+    padding: 12px 16px;
+    background: #f8f9fa;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#product .row{
+    width: 90%;
+    margin: 30px auto;
+}
+
+#product .gauche, #product .droite{
+    width: 50%;
+}
+
+#product .gauche img{
+    width: 100%;
+}
+
+#product .texte{
+    padding: 20px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 20px;
+}
+
+#product-galerie{
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin: 15px 0;
+}
+
+#product-galerie img{
+    object-fit: contain;
+}
+
+
+
+/************ Media ****************/
+
+@media all and (max-width: 1080px)
+{
+    #hero{
+        grid-column: 3 / span 6;
+    }
+}
+
+@media all and (max-width: 815px)
+{
+    .container{
+        width: 100%;
+    }
+
+    header nav ul{
+        display: none;
+    }
+
+    header nav{
+        justify-content: end;
+    }
+
+    #container-burger{
+        display: block;
+        margin-right: 15px;
+    }
+    .card-container{
+        grid-template-columns: repeat(3, 1fr);
+    }
+    #product .gauche, #product .droite{
+        width: 100%;
+    }
+}
+
+@media all and (max-width: 690px)
+{
+    #hero{
+        grid-column: 2 / span 10;
+    }
+    #pres .gauche, #pres .droite{
+        width: 100%;
+    }
+    #pres .gauche{
+        height: 300px;
+    }
+
+    #container-gal{
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .card-container{
+        grid-template-columns: 1fr;
+    }
+}
+
+@media all and (max-width: 600px)
+{
+    #container{
+        height: auto;
+        padding-bottom: 20px;
+    }
+
+    #contact{
+        background-color: #818181;
+    }
+
+    #container .wrapper{
+        flex-wrap: wrap;
+    }
+    #contact .gauche, #contact .droite{
+        width: 100%;
+    }
+
+    #contact .gauche{
+        height: auto;
+        padding-bottom: 20px;
+    }
+
+    #disclaimer, #about, #social-footer{
+        width: 100%;
+    }
+
+    .skills .title{
+        font-size: 10px;
+    }
+}
+
+@media all and (max-width: 410px)
+{
+    #hero{
+        grid-row: 3 / span 7;
+    }
+    #container-gal{
+        grid-template-columns: 1fr;
+    }
+
+
+}
+
